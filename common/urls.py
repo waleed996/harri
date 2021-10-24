@@ -11,6 +11,7 @@ from common.views import CommonView
 
 urlpatterns = [
 
+    # Basic Hello World Test API
     path("hello-world", CommonView.as_view()),
 
 ]
