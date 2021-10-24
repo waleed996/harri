@@ -1,0 +1,36 @@
+{
+    "_comment": "Contains all server response messages against SERVER_MSG_LOCALE configured in settings",
+
+
+
+    "1000": {
+        "msg": {
+            "en": "Successful",
+            "ar": ""
+        }
+    },
+
+    "1001": {
+        "msg": {
+            "en": "Unsuccessful",
+            "ar": ""
+        }
+    },
+
+    "1002": {
+        "msg": {
+            "en": "Something went wrong",
+            "ar": ""
+        }
+    },
+
+
+
+    "100": {
+        "msg": {
+            "en": "Mandatory keys not provided",
+            "ar": ""
+        }
+    }
+
+}
