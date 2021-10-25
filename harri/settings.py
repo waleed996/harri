@@ -48,7 +48,9 @@ INSTALLED_APPS = [
     # Second party apps
     ###################
     "common",
-
+    "invoice",
+    "store",
+    "order",
 
 
     ###################

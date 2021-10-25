@@ -28,7 +28,21 @@
 
     "100": {
         "msg": {
-            "en": "Mandatory keys not provided",
+            "en": "store_id not provided",
+            "ar": ""
+        }
+    },
+
+    "101": {
+        "msg": {
+            "en": "start date not provided",
+            "ar": ""
+        }
+    },
+
+    "102": {
+        "msg": {
+            "en": "end date not provided",
             "ar": ""
         }
     }

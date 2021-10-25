@@ -24,4 +24,7 @@ urlpatterns = [
 
     # common app urls
     path("harri/common/", include("common.urls")),
+
+    # invoice app urls
+    path("harri/", include("invoice.urls"))
 ]
