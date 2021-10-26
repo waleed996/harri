@@ -76,16 +76,30 @@ class InvoiceReportViewController:
             if not get_query_param_or_default(request, "end_date", None):
                 return create_response(create_message([], 102), 400)
 
-            invoices = Invoice.objects.filter(
-                created_at__range=[get_query_param_or_default(request, "start_date", None),
+
+            # Apply the date range and store filter, then get the distinct dates
+            unique_dates = list(Invoice.objects.filter(
+                store_id=int(get_query_param_or_default(request, "store_id", None)),
+                created_at__date__range=
+                [get_query_param_or_default(request, "start_date", None),
                 get_query_param_or_default(request, "end_date", None)]
-            ).annotate(count=Count('created_at__date')).order_by('created_at__date')
+                ).
+                distinct("created_at__date").order_by('created_at__date').values_list("created_at__date"))
 
-            serialized = InvoiceReportSerializer(invoices, many=True)
 
-            # TODO: change according to the date key format discussed in interview
+            # For each date get the invoices summary and append in the output data list
+            data_list = []
+            for date in unique_dates:
+                invoices = Invoice.objects.filter(created_at__date=date[0])
+                d = {
+                    "date": str(date[0]),
+                    "invoice_count": invoices.count(),
+                    "invoices": InvoiceReportSerializer(invoices, many=True).data
+                }
+                data_list.append(d)
 
-            return create_response(create_message(serialized.data, 1000), 200)
+
+            return create_response(create_message(data_list, 1000), 200)
 
         except Exception as ex:
             print(ex)

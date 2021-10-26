@@ -28,10 +28,10 @@ class InvoiceReportSerializer(ModelSerializer):
 
     class Meta:
         model = Invoice
-        fields = ["items_count", "total_prices"]
+        fields = ["items_count", "total_prices", "invoice_date"]
 
 
-
+    invoice_date = SerializerMethodField()
     items_count = SerializerMethodField()
     total_prices = SerializerMethodField()
 
@@ -58,4 +58,9 @@ class InvoiceReportSerializer(ModelSerializer):
                 total_price += item.store_item.price
 
             return str(total_price)
+
+
+    def get_invoice_date(self, obj):
+
+        return str(obj.created_at.date())
 
